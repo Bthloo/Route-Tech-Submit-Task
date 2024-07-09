@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'color_helper.dart';
 
@@ -10,6 +12,7 @@ class ProductCard extends StatelessWidget {
     required this.productPrice,
     required this.productOldPrice,
     required this.productRating,
+    required this.productImage,
   });
 
   final String productName;
@@ -17,6 +20,7 @@ class ProductCard extends StatelessWidget {
   final num productPrice;
   final num productOldPrice;
   final num productRating;
+  final String productImage;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,19 +38,32 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            height: 130,
-            // width: MediaQuery.of(context).size.width * 0.4,
-            decoration: const BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(18),
-                topRight: Radius.circular(18),
-              ),
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(18),
+              topRight: Radius.circular(18),
+            ),
+            child: CachedNetworkImage(
+                imageUrl: productImage,
+              fit: BoxFit.fill,
+              height: 100.r,
+              width: MediaQuery.of(context).size.width * 0.5,
 
             ),
-
           ),
+          // Container(
+          //   height: 130,
+          //   // width: MediaQuery.of(context).size.width * 0.4,
+          //   decoration: const BoxDecoration(
+          //     color: Colors.red,
+          //     borderRadius: BorderRadius.only(
+          //       topLeft: Radius.circular(18),
+          //       topRight: Radius.circular(18),
+          //     ),
+          //
+          //   ),
+          //
+          // ),
           Container(
             padding: const EdgeInsets.all(3),
             child:  Column(
@@ -54,7 +71,7 @@ class ProductCard extends StatelessWidget {
               children: [
                 Text(productName,
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 17.sp,
                     fontWeight: FontWeight.w600,
                     overflow: TextOverflow.ellipsis,
                     color: ColorHelper.textColor,
@@ -63,7 +80,7 @@ class ProductCard extends StatelessWidget {
                 ),
                 Text(productDescription,
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 17.sp,
                     fontWeight: FontWeight.w600,
                     overflow: TextOverflow.ellipsis,
                     color: ColorHelper.textColor,
@@ -71,44 +88,52 @@ class ProductCard extends StatelessWidget {
                   maxLines: 1,
 
                 ),
-                SizedBox(height: 7,),
+                 SizedBox(height: 7.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text("EGP $productPrice ",
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis,
                         color: ColorHelper.textColor,
                       ),
                       maxLines: 1,
                     ),
-                    SizedBox(width: 20,),
-                    Text("$productOldPrice",
-                      style: TextStyle(
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: ColorHelper.mainColor.withOpacity(.5),
-                        fontSize: 14,
-                        color: ColorHelper.mainColor.withOpacity(.5),
-                        fontWeight: FontWeight.w600,
-                        overflow: TextOverflow.ellipsis,
+                     SizedBox(width: 15.w,),
+                    SizedBox(
+                      width: 50.w,
+                      child: Text("$productOldPrice",
+                        style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          decorationColor: ColorHelper.mainColor.withOpacity(.5),
+                          fontSize: 14.sp,
+                          color: ColorHelper.mainColor.withOpacity(.5),
+                          fontWeight: FontWeight.w600,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        maxLines: 1,
                       ),
-                      maxLines: 1,
                     ),
                   ],
                 ),
-                SizedBox(height: 7,),
-                Text("Review ($productRating)",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    overflow: TextOverflow.ellipsis,
-                    color: ColorHelper.textColor,
-                  ),
-                  maxLines: 1,
+                 SizedBox(height: 7.h,),
+                Row(
+                  children: [
+                    Text("Review ($productRating) ",
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w600,
+                        overflow: TextOverflow.ellipsis,
+                        color: ColorHelper.textColor,
+                      ),
+                      maxLines: 1,
+                    ),
+                    const Icon(Icons.star,color: Colors.amber,)
+                  ],
                 ),
-                SizedBox(height: 7,),
+                 SizedBox(height: 7.h,),
               ],
             ),
           ),

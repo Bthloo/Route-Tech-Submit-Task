@@ -1,12 +1,12 @@
 
-class ProductEntity {
-  ProductEntity({
+class ProductsEntity {
+  ProductsEntity({
       this.products, 
       this.total, 
       this.skip, 
       this.limit,});
 
-  ProductEntity.fromJson(dynamic json) {
+  ProductsEntity.fromJson(dynamic json) {
     if (json['products'] != null) {
       products = [];
       json['products'].forEach((v) {
@@ -34,6 +34,9 @@ class ProductEntity {
   }
 
 }
+
+
+
 class Products {
   Products({
       this.id, 
@@ -145,6 +148,7 @@ class Products {
   }
 
 }
+
 class Meta {
   Meta({
       this.createdAt, 
@@ -173,7 +177,6 @@ class Meta {
   }
 
 }
-
 class Reviews {
   Reviews({
       this.rating, 
