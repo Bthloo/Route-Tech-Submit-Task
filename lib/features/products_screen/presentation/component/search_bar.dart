@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/general_component/color_helper.dart';
 import '../../../../../core/general_component/custom_form_field.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+class CustomSearchBar extends StatelessWidget {
+  const CustomSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {

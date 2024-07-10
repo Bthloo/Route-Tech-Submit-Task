@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -15,11 +17,11 @@ class ProductsRepositoryImplementation extends ProductsRepository{
   @override
   Future<Either<Failure,ProductsEntity>> getProducts()async{
     try{
-      final remoteUser = await remoteDatasource.getProducts();
-      return Right(remoteUser);
-    }catch(e){
+      final remoteProducts = await remoteDatasource.getProducts();
+      return Right(remoteProducts);
+    } catch(e){
       debugPrint(e.toString());
-      return Left(Failure( message : e.toString()));
+      return Left(Failure(message: e.toString()));
     }
 
   }

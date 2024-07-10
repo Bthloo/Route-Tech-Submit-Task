@@ -12,15 +12,11 @@ class GetProductsCubit extends Cubit<GetProductsState> {
   GetProductsCubit() : super(GetProductsInitial());
   getProducts()async{
     emit(GetProductsLoading());
-  final get = await GetProducts(repository: ProductsRepositoryImplementation(
-        remoteDatasource: ProductsRemoteDatasource()
-
-    )).call();
-
+  final get = await GetProducts(
+      repository: ProductsRepositoryImplementation(
+        remoteDatasource: ProductsRemoteDatasource())).call();
   get.fold(
-      (failed) => emit(GetProductsFailure(failed.toString())),
-     (success) => emit(GetProductsSuccess(success))
-  );
-
+      (failed) => emit(GetProductsFailure(failed.message.toString())),
+      (success) => emit(GetProductsSuccess(success)));
   }
 }
